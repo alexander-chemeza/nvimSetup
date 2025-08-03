@@ -3,7 +3,6 @@
 echo -e "\e[93mInstalling dependencies...\e[0m"
 sudo apt install gcc make ripgrep tmux xclip fd-find golang rustc ruby php-cli nodejs npm
 sudo npm install -g @angular/language-server typescript-language-server eslint_d @fsouza/prettierd markdownlint-cli fixjson jsonlint nginxbeautifier
-cargo install stylua
 
 url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 filename=$(basename "$url")
