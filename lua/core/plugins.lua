@@ -23,6 +23,9 @@ vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
+	rocks = {
+    	enabled = false  -- Add this if you won't use LuaRocks-based plugins
+		},
 	spec = {
 		{
 			"windwp/nvim-autopairs",
