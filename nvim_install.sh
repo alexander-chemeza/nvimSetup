@@ -5,6 +5,7 @@ sudo apt install gcc make ripgrep tmux xclip fd-find nodejs npm
 # golang rustc ruby php-cli
 # sudo npm install -g @angular/language-server typescript-language-server eslint_d @fsouza/prettierd markdownlint-cli fixjson jsonlint nginxbeautifier
 
+
 url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 filename=$(basename "$url")
 echo -e "\e[93mStarting downloading of $filename ...\e[0m"
