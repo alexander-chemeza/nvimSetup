@@ -22,4 +22,5 @@ require('plugins.whichkey')
 require('plugins.cmp')
 require('plugins.lsp')
 require('plugins.mason')
-require('plugins.nullls')
+-- require('plugins.nullls')
+
