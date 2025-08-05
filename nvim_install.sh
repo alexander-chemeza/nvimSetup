@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e "\e[93mInstalling dependencies...\e[0m"
-sudo apt install gcc make ripgrep tmux xclip fd-find nodejs npm
+sudo apt install gcc make ripgrep tmux xclip fd-find nodejs npm python3-venv python3-pip
 
 url="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz"
 filename=$(basename "$url")
