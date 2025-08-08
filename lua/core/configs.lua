@@ -18,6 +18,7 @@ vim.opt.mousefocus = true
 
 -- Line Numbers
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- Splits
 vim.opt.splitbelow = true
