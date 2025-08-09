@@ -2,7 +2,6 @@
 require('core.plugins')
 require('core.configs')
 require('core.mappings')
-require('core.colors')
 
 
 -- Plugins
@@ -22,3 +21,4 @@ require('plugins.whichkey')
 require('plugins.cmp')
 require('plugins.lsp')
 require('plugins.mason')
+require('plugins.conform')
