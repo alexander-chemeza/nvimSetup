@@ -54,3 +54,27 @@ vim.cmd([[highlight clear SignColumn]])
 
 -- Theme
 vim.cmd 'colorscheme material-darker'
+
+
+-- Diagnostics
+
+vim.diagnostic.config({
+    underline = true,
+    virtual_text = false,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = ' ',
+            [vim.diagnostic.severity.WARN] = ' ',
+            [vim.diagnostic.severity.INFO] = ' ',
+            [vim.diagnostic.severity.HINT] = '󰌵',
+        },
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        },
+        numhl = {
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+        },
+    },
+    update_in_insert = true,
+    severity_sort = true,
+})

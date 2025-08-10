@@ -84,14 +84,6 @@ for server, config in pairs(servers) do
     }, config))
 end
 
--- Настройка диагностики
-vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true
-})
 
 -- Форматирование при сохранении
 vim.api.nvim_create_autocmd('BufWritePre', {
