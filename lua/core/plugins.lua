@@ -91,16 +91,24 @@ require("lazy").setup({
         { "folke/which-key.nvim" },
         -- For YAML/JSON
         { "b0o/SchemaStore.nvim" },
+        -- Manager to install lsp, linter, formatters
         {
             "williamboman/mason.nvim",
             build = ":MasonUpdate",
         },
+        -- Bridge between mason and LSP
         { "williamboman/mason-lspconfig.nvim" },
+        -- LSP configuration
         { "neovim/nvim-lspconfig" },
+        -- Autocomplete for lsp
         { "hrsh7th/cmp-nvim-lsp" },
+        -- Autocomplete for buffer
         { "hrsh7th/cmp-buffer" },
+        -- Autocomplete for paths
         { "hrsh7th/cmp-path" },
+        -- Command line autocomplete
         { "hrsh7th/cmp-cmdline" },
+        -- Autocomplete engine
         { "hrsh7th/nvim-cmp" },
         {
             'stevearc/conform.nvim',
