@@ -4,7 +4,7 @@ require("bufferline").setup {
         -- buffer_close_icon = ' ',
         close_icon = " ",
         show_buffer_close_icons = true,
-        separator_style = "slant",
+        -- separator_style = "slant",
         mode = 'buffers',
         offsets = {
             {

@@ -58,7 +58,6 @@ vim.cmd([[highlight clear SignColumn]])
 -- Theme
 vim.cmd 'colorscheme material-darker'
 
-
 -- Diagnostics
 
 vim.diagnostic.config({

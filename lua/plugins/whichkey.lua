@@ -55,8 +55,6 @@ wk.add({
     { "<c-j>",      "<cmd>wincmd j<CR>",                              desc = "Go to Bottom Window" },
     { "<c-h>",      "<cmd>wincmd h<CR>",                              desc = "Go to Left Window" },
     { "<c-l>",      "<cmd>wincmd l<CR>",                              desc = "Go to Right Window" },
-    { "|",          "<cmd>vsplit<CR>",                                desc = "Vertical Split" },
-    { "|",          "<cmd>vsplit<CR>",                                desc = "Vertical Split" },
     -- Other
     { "jj",         "<Esc>",                                          desc = "Exit mode",                 mode = "i" },
     { "<leader>qa", "<cmd>quitall<CR>",                               desc = "Quit Neovim" }
