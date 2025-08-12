@@ -1,8 +1,6 @@
 -- Basic configuration
 require('core.plugins')
 require('core.configs')
-require('core.mappings')
-
 
 -- Plugins
 require('plugins.autopairs')

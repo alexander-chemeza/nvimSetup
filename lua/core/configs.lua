@@ -1,5 +1,8 @@
 vim.wo.number = true
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.g.did_load_filetypes = 1
 vim.g.formatoptions = "qrn1"
 vim.opt.showmode = false
