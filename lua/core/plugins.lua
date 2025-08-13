@@ -105,10 +105,15 @@ require("lazy").setup({
         { "hrsh7th/cmp-cmdline" },
         -- Autocomplete engine
         { "hrsh7th/nvim-cmp" },
+        -- Formatters
         {
             'stevearc/conform.nvim',
             opts = {},
         },
+        -- Show git diff
+        { 'sindrets/diffview.nvim' },
+        -- Folding plugin
+        { 'kevinhwang91/nvim-ufo', dependencies = { 'kevinhwang91/promise-async' } },
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.

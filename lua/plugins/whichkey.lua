@@ -8,6 +8,11 @@ wk.add({
     { "<leader>bx", "<cmd>BufferLinePickClose<CR>",                   desc = "Buffer Pick Close" },
     { "<leader>bX", "<cmd>BufferLineCloseRight<CR>",                  desc = "Buffer Close Right" },
     { "<leader>bs", "<cmd>BufferLineSortByTabs<CR>",                  desc = "Buffer Sort By Tabs" },
+    -- Diff View
+    { "<leader>d",  group = "Diff View" },
+    { "<leader>do", "<cmd>DiffviewOpen<CR>",                          desc = "Diff View Open" },
+    { "<leader>dc", "<cmd>DiffviewClose<CR>",                         desc = "Diff View Close" },
+    { "<leader>dt", "<cmd>DiffviewToggleFiles<CR>",                   desc = "Diff View Toggle Files" },
     -- Find files
     { "<leader>f",  group = "Files" },
     { "<leader>ff", "<cmd>Telescope find_files<CR>",                  desc = "Find File" },
