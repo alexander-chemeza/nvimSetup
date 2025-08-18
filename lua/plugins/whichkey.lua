@@ -42,6 +42,7 @@ wk.add({
     { "<leader>lD", "<cmd>lua vim.lsp.buf.hover()<CR>",               desc = "Hover Diagnostic" },
     { "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>",              desc = "Format" },
     { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>",              desc = "Rename" },
+    { "<leader>lR", "<cmd>LspRestart<CR>",                            desc = "Restart LSP" },
     { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>",         desc = "Code Action" },
     { "<leader>ls", "<cmd>Telescope lsp_document_symbols<CR>",        desc = "Document Symbols" },
     -- Comments
