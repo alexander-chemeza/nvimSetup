@@ -102,6 +102,17 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     end
 })
 
+local function setup_python()
+    local python_path = vim.fn.exepath('python3') or vim.fn.exepath('python')
+
+    if python_path and python_path ~= '' then
+        -- Set for Neovim Python host
+        vim.g.python3_host_prog = python_path
+    end
+end
+
+setup_python()
+
 -- Keymaps для диагностики
 -- vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float)
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
