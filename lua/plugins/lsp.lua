@@ -42,23 +42,23 @@ local servers = {
         settings = {
             python = {
                 analysis = {
-                    typeCheckingMode = "strict",
+                    typeCheckingMode = "basic",
                     autoSearchPaths = true,
                     useLibraryCodeForTypes = true,
                     diagnosticMode = "workspace",
                     -- These settings will flag missing variable type hints
-                    reportUnknownVariableType = "error",
-                    reportUnknownParameterType = "error",
-                    reportUnknownArgumentType = "error",
-                    reportUnknownLambdaType = "error",
-                    reportUnknownMemberType = "error",
+                    -- reportUnknownVariableType = "error",
+                    -- reportUnknownParameterType = "error",
+                    -- reportUnknownArgumentType = "error",
+                    -- reportUnknownLambdaType = "error",
+                    -- reportUnknownMemberType = "error",
 
                     -- Also enable these for comprehensive checking
-                    reportMissingParameterType = "error",
-                    reportMissingReturnType = "error",
-                    reportMissingTypeArgument = "error",
+                    -- reportMissingParameterType = "error",
+                    -- reportMissingReturnType = "error",
+                    -- reportMissingTypeArgument = "error",
                     -- Skip
-                    reportUntypedBaseClass = false
+                    -- reportUntypedBaseClass = false
                 }
             }
         }
