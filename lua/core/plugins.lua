@@ -114,6 +114,9 @@ require("lazy").setup({
         { 'sindrets/diffview.nvim' },
         -- Folding plugin
         { 'kevinhwang91/nvim-ufo', dependencies = { 'kevinhwang91/promise-async' } },
+        {
+            "lukas-reineke/indent-blankline.nvim",
+        },
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.

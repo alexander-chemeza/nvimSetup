@@ -63,7 +63,14 @@ wk.add({
     { "<c-l>",      "<cmd>wincmd l<CR>",                              desc = "Go to Right Window" },
     -- Other
     { "jj",         "<Esc>",                                          desc = "Exit mode",                 mode = "i" },
-    { "<leader>qa", "<cmd>quitall<CR>",                               desc = "Quit Neovim" }
+    { "<leader>qa", "<cmd>quitall<CR>",                               desc = "Quit Neovim" },
+    -- Resize
+    { "<Up>",       "<cmd>resize -2<CR>",                             desc = "Resize Up" },
+    { "<Down>",     "<cmd>resize +2<CR>",                             desc = "Resize Down" },
+    { "<Left>",     "<cmd>vertical resize -2<CR>",                    desc = "Resize Left" },
+    { "<Right>",    "<cmd>vertical resize +2<CR>",                    desc = "Resize Right" },
+    -- Close split
+    { "<leader>q",  "<cmd>q<CR>",                                     desc = "Close split" }
 })
 
 
