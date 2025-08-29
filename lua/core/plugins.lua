@@ -54,6 +54,7 @@ require("lazy").setup({
         },
         -- My theme
         { 'marko-cerovac/material.nvim' },
+        { "zaldih/themery.nvim",            lazy = false },
         -- Plugin to add symbols for warning, errors end etc.
         { "windwp/nvim-ts-autotag" },
         -- Plugin to add a row with opened files
