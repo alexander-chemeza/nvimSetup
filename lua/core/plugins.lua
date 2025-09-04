@@ -106,6 +106,9 @@ require("lazy").setup({
         { "hrsh7th/cmp-cmdline" },
         -- Autocomplete engine
         { "hrsh7th/nvim-cmp" },
+        --- Snippet engine
+        { "L3MON4D3/LuaSnip",                 build = "make install_jsregexp" },
+        { "saadparwaiz1/cmp_luasnip" },
         -- Formatters
         {
             'stevearc/conform.nvim',

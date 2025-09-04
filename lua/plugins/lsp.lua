@@ -16,6 +16,29 @@ local servers = {
             }
         }
     },
+    emmet_ls = {
+        capabilities = capabilities,
+        filetypes = {
+            "html",
+            "css",
+            "javascriptreact",
+            "typescriptreact",
+            "vue",
+            "xml",
+            "xsl",
+            "pug",
+            "sass",
+            "scss",
+            "less"
+        },
+        init_options = {
+            html = {
+                options = {
+                    ["bem.enabled"] = true,
+                }
+            }
+        }
+    },
     eslint = {
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = true

@@ -19,6 +19,7 @@ require("nvim-treesitter.configs").setup({
         "json",
         "json5",
         "nginx",
+        "html",
     },
     ignore_install = {},
     sync_install = false,
