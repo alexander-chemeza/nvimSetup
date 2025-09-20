@@ -1,66 +1,80 @@
-local lspconfig = require('lspconfig')
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
--- Настройка базовых возможностей LSP
+-- Capabilities
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- Настройки для конкретных LSP серверов
+-- Common on_attach
+local function on_attach(client, bufnr)
+    local opts = { buffer = bufnr }
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+end
+
+-- Helpers
+local function fallback_root(files)
+    return function(fname)
+        local found = vim.fs.find(files, { path = fname and vim.fs.dirname(fname) or vim.loop.cwd(), upward = true })
+        return found[1] and vim.fs.dirname(found[1]) or vim.loop.cwd()
+    end
+end
+
+-- Servers
 local servers = {
-    lua_ls = {
+    {
+        name = "lua_ls",
+        cmd = { "lua-language-server" },
+        filetypes = { "lua" },
+        root_dir = fallback_root({ ".git", ".luarc.json" }),
         settings = {
             Lua = {
-                runtime = { version = 'LuaJIT' },
-                diagnostics = { globals = { 'vim' } },
-                workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-                telemetry = { enable = false }
-            }
-        }
-    },
-    emmet_ls = {
-        capabilities = capabilities,
-        filetypes = {
-            "html",
-            "css",
-            "javascriptreact",
-            "typescriptreact",
-            "vue",
-            "xml",
-            "xsl",
-            "pug",
-            "sass",
-            "scss",
-            "less"
+                runtime = { version = "LuaJIT" },
+                diagnostics = { globals = { "vim" } },
+                workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+                telemetry = { enable = false },
+            },
         },
-        init_options = {
-            html = {
-                options = {
-                    ["bem.enabled"] = true,
-                }
-            }
-        }
     },
-    eslint = {
+    {
+        name = "emmet_ls",
+        cmd = { "emmet-ls", "--stdio" },
+        filetypes = { "html", "css", "javascriptreact", "typescriptreact", "vue", "xml", "xsl", "pug", "sass", "scss", "less" },
+        root_dir = fallback_root({ ".git" }),
+        init_options = { html = { options = { ["bem.enabled"] = true } } },
+    },
+    {
+        name = "eslint",
+        cmd = { "vscode-eslint-language-server", "--stdio" },
+        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        root_dir = fallback_root({ ".eslintrc.js", ".git" }),
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = true
-        end
+            on_attach(client, bufnr)
+        end,
     },
-    ts_ls = {
+    {
+        name = "tsserver",
+        cmd = { "typescript-language-server", "--stdio" },
+        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        root_dir = fallback_root({ "package.json", "tsconfig.json", "jsconfig.json", ".git" }),
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = false
+            on_attach(client, bufnr)
         end,
-        root_dir = lspconfig.util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json')
     },
-    basedpyright = { -- Заменяем pyright на basedpyright
+    {
+        name = "basedpyright",
+        cmd = { "basedpyright-langserver", "--stdio" },
+        filetypes = { "python" },
+        root_dir = fallback_root({ "pyproject.toml", "setup.py", "requirements.txt", ".git" }),
         on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = true
             client.server_capabilities.codeActionProvider = {
                 resolveProvider = true,
-                codeActionKinds = {
-                    "quickfix",
-                    "refactor",
-                    "source.organizeImports",
-                }
+                codeActionKinds = { "quickfix", "refactor", "source.organizeImports" },
             }
+            on_attach(client, bufnr)
         end,
         settings = {
             python = {
@@ -69,87 +83,54 @@ local servers = {
                     autoSearchPaths = true,
                     useLibraryCodeForTypes = true,
                     diagnosticMode = "workspace",
-                    -- These settings will flag missing variable type hints
-                    -- reportUnknownVariableType = "error",
-                    -- reportUnknownParameterType = "error",
-                    -- reportUnknownArgumentType = "error",
-                    -- reportUnknownLambdaType = "error",
-                    -- reportUnknownMemberType = "error",
-
-                    -- Also enable these for comprehensive checking
-                    -- reportMissingParameterType = "error",
-                    -- reportMissingReturnType = "error",
-                    -- reportMissingTypeArgument = "error",
-                    -- Skip
-                    -- reportUntypedBaseClass = false
-                }
-            }
-        }
+                },
+            },
+        },
     },
-    yamlls = {
+    {
+        name = "yamlls",
+        cmd = { "yaml-language-server", "--stdio" },
+        filetypes = { "yaml" },
+        root_dir = fallback_root({ ".git" }),
         settings = {
             yaml = {
-                schemas = {
-                    ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*'
-                }
-            }
-        }
+                schemas = { ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*" },
+            },
+        },
     },
-    jsonls = {
+    {
+        name = "jsonls",
+        cmd = { "vscode-json-language-server", "--stdio" },
+        filetypes = { "json" },
+        root_dir = fallback_root({ ".git" }),
         settings = {
             json = {
-                schemas = require('schemastore').json.schemas(),
-                validate = { enable = true }
-            }
-        }
-    }
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
+            },
+        },
+    },
 }
 
--- Настройка каждого сервера
-for server, config in pairs(servers) do
-    lspconfig[server].setup(vim.tbl_deep_extend('force', {
-        capabilities = capabilities,
-        on_attach = function(client, bufnr)
-            -- Общие keymaps для всех LSP
-            local opts = { buffer = bufnr }
-            vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-            vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
-            vim.keymap.set('n', '<leader>gr', vim.lsp.buf.rename, opts)
-            vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-        end
-    }, config))
+-- Start servers lazily (only when opening a matching filetype)
+for _, config in ipairs(servers) do
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = config.filetypes or "*",
+        callback = function(args)
+            local final_config = vim.tbl_deep_extend("force", {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }, config, { root_dir = config.root_dir(args.file) })
+            vim.lsp.start(final_config)
+        end,
+    })
 end
 
-
--- Форматирование при сохранении
-vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = { '*.lua', '*.py', '*.js', '*.ts', '*.json', '*.yaml', '*.html', '*.css' },
+-- Auto-format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.lua", "*.py", "*.js", "*.ts", "*.json", "*.yaml", "*.html", "*.css" },
     callback = function()
-        vim.lsp.buf.format({
-            async = false,
-            -- filter = function(client)
-            -- Отключаем форматирование для ts_ls/basedpyright
-            -- if client.name == 'ts_ls' or client.name == 'basedpyright' then
-            -- return false
-            -- end
-            -- return true
-            -- end
-        })
-    end
+        vim.lsp.buf.format({ async = false })
+    end,
 })
 
-local function setup_python()
-    local python_path = vim.fn.exepath('python3') or vim.fn.exepath('python')
-
-    if python_path and python_path ~= '' then
-        -- Set for Neovim Python host
-        vim.g.python3_host_prog = python_path
-    end
-end
-
-setup_python()
-
--- Keymaps для диагностики
--- vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float)
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
